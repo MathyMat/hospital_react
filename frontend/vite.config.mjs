@@ -7,7 +7,7 @@ export default defineConfig(() => {
   return {
     base: './',
     build: {
-      outDir: 'build',
+      outDir: 'frontend/build',
     },
     css: {
       postcss: {
