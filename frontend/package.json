@@ -6,7 +6,7 @@
   "license": "",
   "author": "",
   "scripts": {
-    "build": "vite build",
+    "build": "react-scripts build",
     "lint": "eslint",
     "serve": "vite preview",
     "start": "vite"
