@@ -36,7 +36,7 @@ export default function FacturacionServicios() {
         const fetchPacientes = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get('http://localhost:3001/api/pacientes');
+                const response = await axios.get((`${API_BASE_URL}/api/facturacion`));
                 const pacientesFormateados = response.data.map(paciente => ({
                     id: paciente.id,
                     nombreCompleto: `${paciente.nombre} ${paciente.apellido}`,
@@ -65,8 +65,8 @@ export default function FacturacionServicios() {
         const pu = typeof precioUnitario === 'number' ? precioUnitario : 0;
         setPrecioTotalItem(cant * pu);
     }, [cantidad, precioUnitario]);
-
-    const API_BASE_URL = 'http://localhost:3001'; // Asegúrate que coincida con el puerto del servidor
+    const API_URL = import.meta.env.VITE_API_URL;
+    // Asegúrate que coincida con el puerto del servidor
 
 const handleAddItemAFactura = async () => {
   try {

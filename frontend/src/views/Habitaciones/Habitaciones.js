@@ -18,7 +18,7 @@ const HabitacionesPacientes = () => {
 
   const cargarAsignaciones = async () => {
     try {
-      const res = await axios.get('http://localhost:3001/api/habitaciones/asignadas');
+      const res = await axios.get('/api/habitaciones/asignadas');
       setAsignaciones(res.data);
     } catch (err) {
       alert('Error al cargar asignaciones');
@@ -27,7 +27,7 @@ const HabitacionesPacientes = () => {
 
   const cargarPacientes = async () => {
     try {
-      const res = await axios.get('http://localhost:3001/api/pacientes');
+      const res = await axios.get('/api/pacientes');
       setPacientes(res.data);
     } catch (err) {
       alert('Error al cargar pacientes');
@@ -36,7 +36,7 @@ const HabitacionesPacientes = () => {
 
   const cargarDoctores = async () => {
     try {
-      const res = await axios.get('http://localhost:3001/api/doctores');
+      const res = await axios.get('/api/doctores');
       setDoctores(res.data);
     } catch (err) {
       alert('Error al cargar doctores');
@@ -45,7 +45,7 @@ const HabitacionesPacientes = () => {
 
   const cargarHabitacionesDisponibles = async () => {
     try {
-      const res = await axios.get('http://localhost:3001/api/habitaciones/disponibles');
+      const res = await axios.get('/api/habitaciones/disponibles');
       setHabitacionesDisponibles(res.data);
     } catch (err) {
       alert('Error al cargar habitaciones disponibles');
@@ -70,8 +70,7 @@ const HabitacionesPacientes = () => {
         motivo_ingreso: formulario.motivo_ingreso
       };
       
-  
-      await axios.post('http://localhost:3001/api/habitaciones/asignar', datosAEnviar);
+      await axios.post('/api/habitaciones/asignar', datosAEnviar);
       alert('Habitación asignada correctamente');
       
       setFormulario({
@@ -91,11 +90,10 @@ const HabitacionesPacientes = () => {
       alert('Error al asignar habitación');
     }
   };
-  
 
   const eliminarAsignacion = async (id) => {
     try {
-      await axios.delete(`http://localhost:3001/api/habitaciones/asignadas/${id}`);
+      await axios.delete(`/api/habitaciones/asignadas/${id}`);
       await cargarAsignaciones();
       await cargarHabitacionesDisponibles();
     } catch (err) {

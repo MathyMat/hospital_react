@@ -13,13 +13,13 @@ const Login = () => {
   const [correo, setCorreo] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
+  const API_URL = import.meta.env.VITE_API_URL;
 
-  const API_URL = process.env.REACT_APP_API_URL;
 
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post(`${API_URL}/api/auth/login`, { correo, password })
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, { correo, password });
       localStorage.setItem('token', res.data.token)
       navigate('/dashboard') // o la ruta protegida que definas
     } catch (err) {

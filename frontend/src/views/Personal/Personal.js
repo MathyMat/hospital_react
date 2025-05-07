@@ -7,7 +7,7 @@ const HistorialPersonal = () => {
   useEffect(() => {
     const fetchDoctores = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/doctores`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}api/doctores`);
         setDoctores(res.data);
       } catch (error) {
         console.error('Error al obtener doctores:', error);

@@ -9,11 +9,11 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         const [resumenRes, actividadesRes, distribucionRes] = await Promise.all([
-          axios.get(`${process.env.REACT_APP_API_URL}/api/dashboard/resumen`),
-          axios.get(`${process.env.REACT_APP_API_URL}/api/dashboard/actividades`),
-          axios.get(`${process.env.REACT_APP_API_URL}/api/dashboard/distribucion`),
+          axios.get(`${import.meta.env.VITE_API_URL}/api/dashboard/resumen`),
+          axios.get(`${import.meta.env.VITE_API_URL}/api/dashboard/actividades`),
+          axios.get(`${import.meta.env.VITE_API_URL}/api/dashboard/distribucion`),
         ]);
-
+        
         const resumen = resumenRes.data;
         const actividades = actividadesRes.data;
         const distribucion = distribucionRes.data;

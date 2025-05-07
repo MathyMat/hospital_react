@@ -5,7 +5,7 @@ const RegistroInventarioHospital = () => {
   const [inventario, setInventario] = useState([])
   const [formulario, setFormulario] = useState({ nombre: '', cantidad: '', descripcion: '' })
 
-  const apiUrl = `${process.env.REACT_APP_API_URL}/api/inventario`
+  const apiUrl = `${import.meta.env.VITE_API_URL}/api/inventario`
 
   const cargarInventario = async () => {
     try {
