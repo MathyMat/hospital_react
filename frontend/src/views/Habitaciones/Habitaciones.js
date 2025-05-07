@@ -20,7 +20,7 @@ const HabitacionesPacientes = () => {
 
   const cargarAsignaciones = async () => {
     try {
-      const res = await axios.get(`${API}/habitaciones/asignadas`);
+      const res = await axios.get(`${API}/api/habitaciones/asignadas`);
       setAsignaciones(res.data);
     } catch (err) {
       alert('Error al cargar asignaciones');
@@ -29,7 +29,7 @@ const HabitacionesPacientes = () => {
 
   const cargarPacientes = async () => {
     try {
-      const res = await axios.get(`${API}/pacientes`);
+      const res = await axios.get(`${API}/api/pacientes`);
       setPacientes(res.data);
     } catch (err) {
       alert('Error al cargar pacientes');
@@ -38,7 +38,7 @@ const HabitacionesPacientes = () => {
 
   const cargarDoctores = async () => {
     try {
-      const res = await axios.get(`${API}/doctores`);
+      const res = await axios.get(`${API}/api/doctores`);
       setDoctores(res.data);
     } catch (err) {
       alert('Error al cargar doctores');
@@ -47,7 +47,7 @@ const HabitacionesPacientes = () => {
 
   const cargarHabitacionesDisponibles = async () => {
     try {
-      const res = await axios.get(`${API}/habitaciones/disponibles`);
+      const res = await axios.get(`${API}/api/habitaciones/disponibles`);
       setHabitacionesDisponibles(res.data);
     } catch (err) {
       alert('Error al cargar habitaciones disponibles');
@@ -70,7 +70,7 @@ const HabitacionesPacientes = () => {
         motivo_ingreso: formulario.motivo_ingreso
       };
 
-      await axios.post(`${API}/habitaciones/asignar`, datos);
+      await axios.post(`${API}/api/habitaciones/asignar`, datos);
 
       alert('Habitación asignada correctamente');
       setFormulario({
@@ -93,7 +93,7 @@ const HabitacionesPacientes = () => {
 
   const eliminarAsignacion = async (id) => {
     try {
-      await axios.delete(`${API}/habitaciones/asignadas/${id}`);
+      await axios.delete(`${API}/api/habitaciones/asignadas/${id}`);
       await cargarAsignaciones();
       await cargarHabitacionesDisponibles();
     } catch (err) {
