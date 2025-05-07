@@ -13,8 +13,8 @@ const RegistroPacientes = () => {
     direccion: '',
     historial: ''
   })
+  const apiUrl = `${import.meta.env.VITE_API_URL}/api/pacientes`
 
-  const apiUrl = `${process.env.REACT_APP_API_URL}/api/pacientes`
 
   const cargarPacientes = async () => {
     try {

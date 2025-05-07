@@ -19,7 +19,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, { correo, password });
+      const res = await axios.post(`${API_URL}/api/auth/login`, { correo, password })
       localStorage.setItem('token', res.data.token)
       navigate('/dashboard') // o la ruta protegida que definas
     } catch (err) {

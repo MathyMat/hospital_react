@@ -16,9 +16,11 @@ const HabitacionesPacientes = () => {
     motivo_ingreso: ''
   });
 
+  const API = import.meta.env.VITE_API_URL;
+
   const cargarAsignaciones = async () => {
     try {
-      const res = await axios.get('/api/habitaciones/asignadas');
+      const res = await axios.get(`${API}/habitaciones/asignadas`);
       setAsignaciones(res.data);
     } catch (err) {
       alert('Error al cargar asignaciones');
@@ -27,7 +29,7 @@ const HabitacionesPacientes = () => {
 
   const cargarPacientes = async () => {
     try {
-      const res = await axios.get('/api/pacientes');
+      const res = await axios.get(`${API}/pacientes`);
       setPacientes(res.data);
     } catch (err) {
       alert('Error al cargar pacientes');
@@ -36,7 +38,7 @@ const HabitacionesPacientes = () => {
 
   const cargarDoctores = async () => {
     try {
-      const res = await axios.get('/api/doctores');
+      const res = await axios.get(`${API}/doctores`);
       setDoctores(res.data);
     } catch (err) {
       alert('Error al cargar doctores');
@@ -45,7 +47,7 @@ const HabitacionesPacientes = () => {
 
   const cargarHabitacionesDisponibles = async () => {
     try {
-      const res = await axios.get('/api/habitaciones/disponibles');
+      const res = await axios.get(`${API}/habitaciones/disponibles`);
       setHabitacionesDisponibles(res.data);
     } catch (err) {
       alert('Error al cargar habitaciones disponibles');
@@ -57,10 +59,8 @@ const HabitacionesPacientes = () => {
   };
 
   const asignarHabitacion = async () => {
-    console.log('Formulario enviado:', formulario); // Para verificar lo que se envía
     try {
-      // Crear un nuevo objeto con las claves que espera el backend
-      const datosAEnviar = {
+      const datos = {
         paciente_id: formulario.paciente_id,
         habitacion_disponible_id: formulario.habitacion_disponible_id,
         fecha_ingreso: formulario.fecha_ingreso,
@@ -69,10 +69,10 @@ const HabitacionesPacientes = () => {
         estado_paciente: formulario.estado_paciente,
         motivo_ingreso: formulario.motivo_ingreso
       };
-      
-      await axios.post('/api/habitaciones/asignar', datosAEnviar);
+
+      await axios.post(`${API}/habitaciones/asignar`, datos);
+
       alert('Habitación asignada correctamente');
-      
       setFormulario({
         paciente_id: '',
         habitacion_disponible_id: '',
@@ -82,18 +82,18 @@ const HabitacionesPacientes = () => {
         estado_paciente: 'Estable',
         motivo_ingreso: ''
       });
-      
+
       await cargarAsignaciones();
       await cargarHabitacionesDisponibles();
     } catch (err) {
-      console.error('Error al asignar habitación:', err);
+      console.error(err);
       alert('Error al asignar habitación');
     }
   };
 
   const eliminarAsignacion = async (id) => {
     try {
-      await axios.delete(`/api/habitaciones/asignadas/${id}`);
+      await axios.delete(`${API}/habitaciones/asignadas/${id}`);
       await cargarAsignaciones();
       await cargarHabitacionesDisponibles();
     } catch (err) {
@@ -113,7 +113,6 @@ const HabitacionesPacientes = () => {
       <h2>Registro de Habitaciones para Pacientes</h2>
 
       <div className="mb-3">
-        {/* Paciente */}
         <select className="form-control mb-2" name="paciente_id" value={formulario.paciente_id} onChange={handleChange}>
           <option value="">Seleccione un paciente</option>
           {pacientes.map(p => (
@@ -121,7 +120,6 @@ const HabitacionesPacientes = () => {
           ))}
         </select>
 
-        {/* Habitación disponible */}
         <select className="form-control mb-2" name="habitacion_disponible_id" value={formulario.habitacion_disponible_id} onChange={handleChange}>
           <option value="">Seleccione una habitación</option>
           {habitacionesDisponibles.map(h => (
@@ -129,11 +127,9 @@ const HabitacionesPacientes = () => {
           ))}
         </select>
 
-        {/* Fechas */}
         <input className="form-control mb-2" type="datetime-local" name="fecha_ingreso" value={formulario.fecha_ingreso} onChange={handleChange} />
         <input className="form-control mb-2" type="datetime-local" name="fecha_salida_estimada" value={formulario.fecha_salida_estimada} onChange={handleChange} />
 
-        {/* Doctor */}
         <select className="form-control mb-2" name="doctor_id" value={formulario.doctor_id} onChange={handleChange}>
           <option value="">Seleccione un médico</option>
           {doctores.map(doc => (
@@ -141,20 +137,17 @@ const HabitacionesPacientes = () => {
           ))}
         </select>
 
-        {/* Estado del paciente */}
         <select className="form-control mb-2" name="estado_paciente" value={formulario.estado_paciente} onChange={handleChange}>
           <option value="Estable">Estable</option>
           <option value="Observación">Observación</option>
           <option value="Crítico">Crítico</option>
         </select>
 
-        {/* Motivo */}
         <input className="form-control mb-2" type="text" name="motivo_ingreso" value={formulario.motivo_ingreso} onChange={handleChange} placeholder="Motivo de Ingreso" />
 
         <button className="btn btn-primary" onClick={asignarHabitacion}>Asignar Habitación</button>
       </div>
 
-      {/* Tabla de asignaciones */}
       <table className="table table-bordered">
         <thead>
           <tr>
@@ -192,3 +185,4 @@ const HabitacionesPacientes = () => {
 };
 
 export default HabitacionesPacientes;
+// HabitacionesPacientes.js
